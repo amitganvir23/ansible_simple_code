@@ -1,0 +1,23 @@
+---
+#$1 = username
+#$2 = user password
+#$3 = server ip
+#$4 = bucket name
+#$5 = bucekt mem
+#$6 = jason file
+- hosts: localhost
+  vars:
+        user: admin
+        pwd: password
+        server_ip: 172.18.46.46
+        bucket_name: test3
+        bucket_mem: 100
+        #jason_file: /root/couchbase/test1.json
+        jason_file: /root/couchbase/test11.zip
+  tasks:
+        - name: Updating Document using jason file
+          shell: "/opt/couchbase/bin/cbdocloader -u {{user}} -p {{pwd}} -n {{server_ip}}:8081 -b {{bucket_name}} -s {{bucket_mem}} {{jason_file}}"
+          register: result
+
+        - debug: msg="{{result}}"               
+
