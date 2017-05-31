@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+#methond - 3
+  vars:
+        v1: "Hello world 3"
+  
+  tasks:
+#methond - 1
+        - debug: msg="Hello world 1"
+        - debug: msg="============================== Hello world 1 =============================="
+
+#methond - 2
+        - name: Executing echo command to print
+          shell: "echo Hello world 2"
+          register: result1
+        - debug: msg="{{result1.stdout}}"
+
+#methond - 3
+        - debug: msg="{{v1}}"
