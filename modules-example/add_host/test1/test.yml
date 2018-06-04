@@ -1,0 +1,27 @@
+---
+- name: Run cmd on localhost
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  tasks:
+   - name: test1 command
+     shell: "date"
+
+   - name: add host to group 'just_created' with variable myname=Amit Ganvir
+     add_host:
+       name: "172.18.46.37"
+       groups: myloc
+       myname: "Amit Ganvir"
+
+- name: Run Role on another hosts
+  hosts: myloc
+  gather_facts: yes
+  roles:
+    - test1 
+
+- name: Run cmd on another hosts
+  hosts: myloc
+  gather_facts: yes
+  tasks:
+   - name: test3 cmd
+     shell: "echo {{myname}}"
